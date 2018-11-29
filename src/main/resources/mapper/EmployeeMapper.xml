@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heroic.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.heroic.pojo.Employee" >
+
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lastName" property="lastname" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="d_id" property="dId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.heroic.pojo.Employee" >
+
+    insert into employee (id, lastName, email, 
+      gender, d_id)
+    values (#{id,jdbcType=INTEGER}, #{lastname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{dId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.heroic.pojo.Employee" >
+
+    update employee
+    set lastName = #{lastname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      d_id = #{dId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+    select id, lastName, email, gender, d_id
+    from employee
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+
+    select id, lastName, email, gender, d_id
+    from employee
+  </select>
+</mapper>
